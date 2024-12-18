@@ -94,7 +94,7 @@ impl Processor {
             .redis
             .get()
             .await?
-            .brpop(self.queues.clone(), 2)
+            .brpop(self.queues.clone(), 2.0)
             .await?;
 
         if let Some((queue, job_raw)) = response {

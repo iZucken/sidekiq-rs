@@ -131,7 +131,7 @@ impl RedisConnection {
     pub async fn brpop(
         &mut self,
         keys: Vec<String>,
-        timeout: usize,
+        timeout: f64,
     ) -> Result<Option<(String, String)>, RedisError> {
         self.connection
             .brpop(self.namespaced_keys(keys), timeout)
@@ -148,7 +148,7 @@ impl RedisConnection {
         self.connection.del(self.namespaced_key(key)).await
     }
 
-    pub async fn expire(&mut self, key: String, value: usize) -> Result<usize, RedisError> {
+    pub async fn expire(&mut self, key: String, value: i64) -> Result<usize, RedisError> {
         self.connection
             .expire(self.namespaced_key(key), value)
             .await
